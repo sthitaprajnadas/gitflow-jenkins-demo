@@ -119,10 +119,11 @@ pipeline{
                 }
                 echo "TAG: ${TAG}"
                 // sh '''cp ./Dockerfile  .
-                echo ${DOCKERHUB_CRED} | docker login -u ${DOCKERHUB_ACCOUNT} --password-stdin                
-                docker build -t ${DOCKERHUB_ACCOUNT}/${SERVICE_NAME}:\${TAG} .
-                docker push ${DOCKERHUB_ACCOUNT}/${SERVICE_NAME}:\${TAG}
-                docker rmi ${DOCKERHUB_ACCOUNT}/${SERVICE_NAME}:\${TAG}'''				
+                sh '''
+                echo $DOCKERHUB_CRED | docker login -u $DOCKERHUB_ACCOUNT --password-stdin                
+                docker build -t $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG} .
+                docker push $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}
+                docker rmi $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}'''				
 			}
 		}
 
