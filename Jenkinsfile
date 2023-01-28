@@ -109,7 +109,7 @@ pipeline{
 
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'npm install'   //install node in jenkins host for this to work
             }
 		}
 		stage('Docker') {
@@ -118,8 +118,8 @@ pipeline{
                     env.TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
                 echo "TAG: ${TAG}"
-                sh '''cp ./Dockerfile  .
-                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin                
+                // sh '''cp ./Dockerfile  .
+                echo $DOCKERHUB_CRED | docker login -u $DOCKERHUB_ACCOUNT --password-stdin                
                 docker build -t $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG} .
                 docker push $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}
                 docker rmi $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}'''				
