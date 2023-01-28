@@ -14,7 +14,7 @@ pipeline{
 
         stage('Initialize') {
             agent {
-                label "docker"
+                label "docker"   // Install docker and docker pipeline plugin for this to work
             }
 
             steps {
@@ -98,9 +98,9 @@ pipeline{
                     echo "BUILD_TYPE: ${BUILD_TYPE}"                    
                     echo "BUILD_VERSION: ${BUILD_VERSION}"                    
 
-                    sh 'pwd'
-                    sh 'ls -la'
-                    sh 'set | sort'
+                    // sh 'pwd'
+                    // sh 'ls -la'
+                    // sh 'set | sort'
     
                 }
             }
