@@ -113,7 +113,11 @@ pipeline{
             }
 		}
 		stage('Docker') {
+
 			steps {
+            
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                echo 'Login Completed'  
                 script{
                     env.TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
