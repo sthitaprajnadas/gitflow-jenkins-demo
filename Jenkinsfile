@@ -7,7 +7,7 @@ pipeline{
     }
  	environment {
        SERVICE_NAME = 'node-demo-app'
-	   DOCKERHUB_CRED = credentials('dockerhub')
+	   DOCKERHUB_CREDENTIALS = credentials('dockerhub')
        DOCKERHUB_ACCOUNT = 'dockerspd'
     }   
     stages { 
@@ -120,7 +120,7 @@ pipeline{
                 echo "TAG: ${TAG}"
                 // sh '''cp ./Dockerfile  .
                 sh '''
-                echo $DOCKERHUB_CRED | docker login -u $DOCKERHUB_ACCOUNT --password-stdin                
+                echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin                
                 docker build -t $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG} .
                 docker push $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}
                 docker rmi $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}'''				
