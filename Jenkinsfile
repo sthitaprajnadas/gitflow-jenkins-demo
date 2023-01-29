@@ -116,15 +116,15 @@ pipeline{
 
 			steps {
             
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
                 echo 'Login Completed'  
                 script{
                     env.TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                 }
                 echo "TAG: ${TAG}"
                 // sh '''cp ./Dockerfile  .
-                sh '''
-                echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin                
+                // echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin    
+                sh '''            
                 docker build -t $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG} .
                 docker push $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}
                 docker rmi $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}'''				
