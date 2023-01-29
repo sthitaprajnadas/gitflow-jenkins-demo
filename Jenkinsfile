@@ -119,8 +119,14 @@ pipeline{
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'                		
                 echo 'Login Completed'  
                 script{
-                   // env.TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                   env.TAG = ${BUILD_TAG}
+
+                    if (BUILD_TAG != ""){
+                        env.TAG = ${BUILD_TAG}
+                    }else{
+                        env.TAG = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    }
+
+                   
                 }
                 echo "TAG: ${TAG}"
                 // sh '''cp ./Dockerfile  .
