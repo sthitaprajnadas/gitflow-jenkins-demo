@@ -13,7 +13,7 @@ git flow feature start vX.XX.XXX    []( git flow feature start v1.0.8 )
 git add .  
 git commit -m "commit for vX.XX.XXX"  []( ex: git commit -m "comit for v1.0.8 )  
 git tag -a vX.XX.XXX -m "tagging for vX.XX.XXX"  []( ex: git tag -a v1.0.8  -m "tagging for v1.0.8"  )  
-git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8"  )  
+git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8  )  
 git push --tags  
 git push  
 
