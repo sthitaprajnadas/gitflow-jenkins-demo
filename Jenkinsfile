@@ -120,7 +120,7 @@ pipeline{
                 echo 'Login Completed'  
                 script{
 
-                    if (${BUILD_TAG}!= ""){
+                    if (${BUILD_TAG} != ""){
                         echo "setting tag when BUILD_TAG has values"
                         env.TAG = "${BUILD_TAG}"
                     }else{
