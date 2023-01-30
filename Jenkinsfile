@@ -97,10 +97,6 @@ pipeline{
                     echo "BUILD_TAG: ${BUILD_TAG}"                    
                     echo "BUILD_TYPE: ${BUILD_TYPE}"                    
                     echo "BUILD_VERSION: ${BUILD_VERSION}"                    
-
-                    // sh 'pwd'
-                    // sh 'ls -la'
-                    // sh 'set | sort'
     
                 }
             }
