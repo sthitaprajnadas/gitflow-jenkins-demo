@@ -73,11 +73,11 @@ pipeline{
                     else if ((matcher)) {
                             BUILD_BRANCH_TYPE = matcher.group(1)
                             BUILD_BRANCH_TASK = matcher.group(2)
-                            BUILD_TYPE = "feature"
+                            BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH_TYPE + "-" +
                             BUILD_BRANCH_TASK.replaceAll(" ", "-") + "-SNAPSHOT"
                     } else {
-                            BUILD_TYPE = "feature"
+                            BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
                     }
 
@@ -97,10 +97,6 @@ pipeline{
                     echo "BUILD_TAG: ${BUILD_TAG}"                    
                     echo "BUILD_TYPE: ${BUILD_TYPE}"                    
                     echo "BUILD_VERSION: ${BUILD_VERSION}"                    
-
-                    // sh 'pwd'
-                    // sh 'ls -la'
-                    // sh 'set | sort'
     
                 }
             }
@@ -130,9 +126,7 @@ pipeline{
 
                    
                 }
-                echo "TAG: ${TAG}"
-                // sh '''cp ./Dockerfile  .
-                // echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin    
+                echo "TAG: ${TAG}"  
                 sh '''            
                 docker build -t $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG} .
                 docker push $DOCKERHUB_ACCOUNT/$SERVICE_NAME:\${TAG}

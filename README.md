@@ -1,5 +1,9 @@
 # Multibranch CI with Gitflow
 
+## Gitflow  
+
+![Gitflow](images/Gitflow.png)  
+
 ## Docker
 ```
 docker build -t dockerspd/node-demo-app .  
@@ -19,11 +23,12 @@ git push
 
 ```
 
-
-
 ## Gitflow References  
 
 https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands
+
+https://www.gitkraken.com/learn/git/git-flow  
+
 
 ```  
 git flow init  
