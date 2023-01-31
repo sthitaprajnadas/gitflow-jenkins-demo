@@ -9,7 +9,6 @@ pipeline{
        SERVICE_NAME = 'node-demo-app'
 	   DOCKERHUB_CREDENTIALS = credentials('dockerhub')
        DOCKERHUB_ACCOUNT = 'dockerspd'
-       GITHUB_CREDENTIALS = credentials('githubid')
 
     }   
     stages { 
@@ -24,7 +23,8 @@ pipeline{
                      $class: 'GitSCM',
                      branches: scm.branches,
                      doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-                     extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true]],
+                     extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true],
+                     [$class: 'PathRestriction', excludedRegions: '<project-name>/db/.*']],
                      submoduleCfg: [],
                      userRemoteConfigs: scm.userRemoteConfigs
                 ])
@@ -159,7 +159,7 @@ pipeline{
                       echo 'If there are any config changes, please contact DevOps Team'
                   }
                 }
-                withCredentials([gitUsernamePassword(credentialsId: 'GITHUB_CREDENTIALS', gitToolName: 'github')]) 
+                withCredentials([gitUsernamePassword(credentialsId: 'githubid', gitToolName: 'github')]) 
                 {
                     // sh 'git remote set-url origin git@github.com:$DOCKERHUB_CREDENTIALS_USR/repo.git'
                     sh "git push origin HEAD:${BUILD_BRANCH}"
