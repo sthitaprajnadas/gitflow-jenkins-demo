@@ -24,7 +24,7 @@ pipeline{
                      branches: scm.branches,
                      doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
                      extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true],
-                     [$class: 'PathRestriction', excludedRegions: '<project-name>/db/.*']],
+                     [$class: 'PathRestriction', excludedRegions: 'node-demo-app/k8s/helm/.*']],
                      submoduleCfg: [],
                      userRemoteConfigs: scm.userRemoteConfigs
                 ])
