@@ -138,27 +138,27 @@ pipeline{
 			}
 		}
 
-		// stage('Deploy') {
-		// 	steps {
-		// 		sh 'rm -rf $SERVICE_NAME'
-		// 		dir ("kubernetes/helm/$SERVICE_NAME/") {
-		// 			sh 'sed -i "s/tag:.*/tag: "\${TAG}"/" values.yaml'
-		// 			sh 'cat values.yaml'
-		// 			sh 'git add values.yaml'
-		// 		}
-        // 		sh 'git clean -fxd'
-		// 		script {
-        //           try {
-        // 				sh "git commit -m 'Jenkins Job changemanifest for $SERVICE_NAME'"
-        //           } catch (Exception e) {
-        //               echo 'Exception occurred: ' + e.toString()
-        //               echo 'Looks like nothing changed from last commit, please check your code'
-        //               echo 'If there are any config changes, please contact DevOps Team'
-        //           }
-        //         }
-        //         sh "git push origin HEAD:qa"
-		// 	}
-		// }
+		stage('Deploy') {
+			steps {
+				sh 'rm -rf $SERVICE_NAME'
+				dir ("k8s/helm/$SERVICE_NAME/") {
+					sh 'sed -i "s/tag:.*/tag: "\${TAG}"/" values.yaml'
+					sh 'cat values.yaml'
+					sh 'git add values.yaml'
+				}
+        		sh 'git clean -fxd'
+				script {
+                  try {
+        				sh "git commit -m 'Jenkins Job changemanifest for $SERVICE_NAME'"
+                  } catch (Exception e) {
+                      echo 'Exception occurred: ' + e.toString()
+                      echo 'Looks like nothing changed from last commit, please check your code'
+                      echo 'If there are any config changes, please contact DevOps Team'
+                  }
+                }
+                sh "git push origin HEAD:qa"
+			}
+		}
 
     }
  
