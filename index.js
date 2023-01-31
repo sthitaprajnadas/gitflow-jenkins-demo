@@ -2,11 +2,12 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-  res.send('Hello World!');
+
+  res.send('Hello World!!');
 });
 
 app.get('/ver', function (req, res) {
-  res.send('version 1.0.0');
+  res.send('version 1.0.14');
 });
 var server = app.listen(3000, function () {
   var host = server.address().address;
