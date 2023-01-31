@@ -7,8 +7,10 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "author": "Das",
   "license": "HPE",
+
   "dependencies": {
     "express": "^4.16.2"
   }

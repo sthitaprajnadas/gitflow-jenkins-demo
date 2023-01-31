@@ -18,9 +18,6 @@ git push --tags
 git push  
 
 ```
-
-
-
 ## Gitflow References  
 
 https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands
