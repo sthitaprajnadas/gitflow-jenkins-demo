@@ -74,11 +74,13 @@ pipeline{
                             BUILD_BRANCH_TYPE = matcher.group(1)
                             BUILD_BRANCH_TASK = matcher.group(2)
                             BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = BUILD_BRANCH_TYPE + "-" +
+                            BUILD_VERSION = BUILD_BRANCH_TYPE 
+                            BUILD_TAG = BUILD_VERSION + "-" + BUILD_BRANCH_TASK
                             BUILD_BRANCH_TASK.replaceAll(" ", "-") + "-SNAPSHOT"
                     } else {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                     }
 
                     env.BUILD_BRANCH = BUILD_BRANCH
