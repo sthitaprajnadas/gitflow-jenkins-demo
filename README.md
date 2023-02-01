@@ -1,5 +1,7 @@
 # Multibranch CI with Gitflow
 
+![Feature Branch Image](images/feature-branch.png?raw=true "Feature Branch")
+
 ## Docker
 ```
 docker build -t dockerspd/node-demo-app .  
@@ -7,20 +9,26 @@ docker push dockerspd/node-demo-app
 docker run -d -p 3100:3000 -v C:\STHITA\CLIENT_WORKS\RMA\POC\Gitflow-demo\node-gitflow\node-demo-app:/root dockerspd/node-demo-app  
 
 ```
-## Steps to trigger a Jenkins build  
+## Steps to trigger a Jenkins build from feature branch
 ```
 git flow feature start vX.XX.XXX    []( git flow feature start v1.0.8 )  
 git add .  
 git commit -m "commit for vX.XX.XXX"  []( ex: git commit -m "comit for v1.0.8 )  
 git tag -a vX.XX.XXX -m "tagging for vX.XX.XXX"  []( ex: git tag -a v1.0.8  -m "tagging for v1.0.8"  )  
-git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8  )  
-git push --tags  
-git push  
+git push --tags  or git push origin --all --follow-tags
+git tag -l --points-at HEAD  []( to check the tag from remote ) 
+git push   
+
+git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8  )   
+
 
 ```
 ## Gitflow References  
 
-https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands
+https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands  
+
+https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands  
+
 
 ```  
 git flow init  
@@ -48,6 +56,9 @@ git flow hotfix start <version>
 git flow hotfix finish <version>  
 git flow hotfix publish <version>  
 git flow hotfix track <version>  
+
+
+![Hotfix Branch Image](images/hotfix-branch.png?raw=true "Hotfix Branch")  
 
 
 

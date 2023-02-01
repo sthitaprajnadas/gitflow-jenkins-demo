@@ -2,13 +2,14 @@ pipeline{
 
     agent any
     options {
-        ansiColor('xterm')
+        ansiColor('xterm')    // ansicolor plugin 
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))       
     }
  	environment {
        SERVICE_NAME = 'node-demo-app'
 	   DOCKERHUB_CREDENTIALS = credentials('dockerhub')
        DOCKERHUB_ACCOUNT = 'dockerspd'
+
     }   
     stages { 
 
@@ -37,26 +38,28 @@ pipeline{
                     def BUILD_VERSION = null
                     def matcher = BUILD_BRANCH =~ /(.*)\/(.*)/
                     
-/*                     if (BUILD_BRANCH == "master") {
+                    if (BUILD_BRANCH == "master") {
                         BUILD_BRANCH_TYPE = "master"
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "release"
                             BUILD_VERSION = BUILD_TAG
                             } 
                         else {
-                                BUILD_TYPE = "snapshot"
-                                BUILD_VERSION = "master-SNAPSHOT"
+                            BUILD_TYPE = "snapshot"
+                            BUILD_VERSION = "master-SNAPSHOT"
                             }
-                    }  */
+                    } 
                     if (BUILD_BRANCH == "release") {
                         BUILD_BRANCH_TYPE = "release"
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             } 
                         else {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = "release-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             }
                     } 
                     else if (BUILD_BRANCH == "develop") {
@@ -64,10 +67,12 @@ pipeline{
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             } 
                         else {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = "develop-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             }
                     } 
                     else if ((matcher)) {
@@ -141,7 +146,8 @@ pipeline{
 		// stage('Deploy') {
 		// 	steps {
 		// 		sh 'rm -rf $SERVICE_NAME'
-		// 		dir ("kubernetes/helm/$SERVICE_NAME/") {
+
+		// 		dir ("k8s/helm/$SERVICE_NAME/") {
 		// 			sh 'sed -i "s/tag:.*/tag: "\${TAG}"/" values.yaml'
 		// 			sh 'cat values.yaml'
 		// 			sh 'git add values.yaml'
@@ -156,7 +162,12 @@ pipeline{
         //               echo 'If there are any config changes, please contact DevOps Team'
         //           }
         //         }
-        //         sh "git push origin HEAD:qa"
+        //         withCredentials([gitUsernamePassword(credentialsId: 'githubid', gitToolName: 'github')]) 
+        //         {
+        //             // sh 'git remote set-url origin git@github.com:$DOCKERHUB_CREDENTIALS_USR/repo.git'
+        //             sh "git push origin HEAD:${BUILD_BRANCH}"
+
+        //         }                
 		// 	}
 		// }
 
