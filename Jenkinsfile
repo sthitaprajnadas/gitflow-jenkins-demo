@@ -2,7 +2,7 @@ pipeline{
 
     agent any
     options {
-        ansiColor('xterm')
+        ansiColor('xterm')    // ansicolor plugin 
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))       
     }
  	environment {
@@ -23,8 +23,7 @@ pipeline{
                      $class: 'GitSCM',
                      branches: scm.branches,
                      doGenerateSubmoduleConfigurations: scm.doGenerateSubmoduleConfigurations,
-                     extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true],
-                     [$class: 'PathRestriction', excludedRegions: 'node-demo-app/k8s/helm/.*']],
+                     extensions: scm.extensions + [[$class: 'CloneOption', noTags: false, reference: '', shallow: true]],
                      submoduleCfg: [],
                      userRemoteConfigs: scm.userRemoteConfigs
                 ])
