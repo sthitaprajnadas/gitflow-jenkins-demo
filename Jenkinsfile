@@ -38,26 +38,28 @@ pipeline{
                     def BUILD_VERSION = null
                     def matcher = BUILD_BRANCH =~ /(.*)\/(.*)/
                     
-/*                     if (BUILD_BRANCH == "master") {
+                    if (BUILD_BRANCH == "master") {
                         BUILD_BRANCH_TYPE = "master"
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "release"
                             BUILD_VERSION = BUILD_TAG
                             } 
                         else {
-                                BUILD_TYPE = "snapshot"
-                                BUILD_VERSION = "master-SNAPSHOT"
+                            BUILD_TYPE = "snapshot"
+                            BUILD_VERSION = "master-SNAPSHOT"
                             }
-                    }  */
+                    } 
                     if (BUILD_BRANCH == "release") {
                         BUILD_BRANCH_TYPE = "release"
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             } 
                         else {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = "release-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             }
                     } 
                     else if (BUILD_BRANCH == "develop") {
@@ -65,10 +67,12 @@ pipeline{
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             } 
                         else {
                             BUILD_TYPE = "snapshot"
                             BUILD_VERSION = "develop-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
                             }
                     } 
                     else if ((matcher)) {

@@ -7,7 +7,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/ver', function (req, res) {
-  res.send('version 1.1.8');
+  res.send('version 1.1.9');
 });
 var server = app.listen(3000, function () {
   var host = server.address().address;
