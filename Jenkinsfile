@@ -34,6 +34,8 @@ pipeline{
                     def BUILD_BRANCH_TASK = null
                     def BUILD_SHA1 = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def BUILD_TAG = sh(script: "git tag -l --points-at HEAD", returnStdout: true).trim()
+                    echo "BUILD_TAG:================================ ${BUILD_TAG}"                    
+
                     def BUILD_TYPE = null
                     def BUILD_VERSION = null
                     def matcher = BUILD_BRANCH =~ /(.*)\/(.*)/
@@ -41,12 +43,16 @@ pipeline{
                     if (BUILD_BRANCH == "master") {
                         BUILD_BRANCH_TYPE = "master"
                         if (BUILD_TAG != "") {
+                            echo "has some build tag "
                             BUILD_TYPE = "release"
                             BUILD_VERSION = BUILD_TAG
                             } 
                         else {
-                            BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = "master-SNAPSHOT"
+                            currentBuild.result = 'FAILURE'
+                            return
+                            // echo "has NO build tag "
+                            // BUILD_TYPE = "snapshot"
+                            // BUILD_VERSION = "master-SNAPSHOT"
                             }
                     } 
                     if (BUILD_BRANCH == "release") {
@@ -70,9 +76,11 @@ pipeline{
                             BUILD_TAG = BUILD_VERSION
                             } 
                         else {
-                            BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = "develop-SNAPSHOT"
-                            BUILD_TAG = BUILD_VERSION
+                            currentBuild.result = 'FAILURE'
+                            return
+                            // BUILD_TYPE = "snapshot"
+                            // BUILD_VERSION = "develop-SNAPSHOT"
+                            // BUILD_TAG = BUILD_VERSION
                             }
                     } 
                     else if ((matcher)) {
@@ -83,9 +91,11 @@ pipeline{
                             BUILD_TAG = BUILD_VERSION + "-" + BUILD_BRANCH_TASK
                             BUILD_BRANCH_TASK.replaceAll(" ", "-") + "-SNAPSHOT"
                     } else {
-                            BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
-                            BUILD_TAG = BUILD_VERSION
+                            currentBuild.result = 'FAILURE'
+                            return
+                            // BUILD_TYPE = "snapshot"
+                            // BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
+                            // BUILD_TAG = BUILD_VERSION
                     }
 
                     env.BUILD_BRANCH = BUILD_BRANCH
