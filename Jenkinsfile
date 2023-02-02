@@ -55,7 +55,7 @@ pipeline{
                             // BUILD_VERSION = "master-SNAPSHOT"
                             }
                     } 
-                    if (BUILD_BRANCH == "release") {
+                    else if (BUILD_BRANCH == "release") {
                         BUILD_BRANCH_TYPE = "release"
                         if (BUILD_TAG != "") {
                             BUILD_TYPE = "snapshot"
