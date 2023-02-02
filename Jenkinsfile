@@ -34,7 +34,7 @@ pipeline{
                     def BUILD_BRANCH_TASK = null
                     def BUILD_SHA1 = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
                     def BUILD_TAG = sh(script: "git tag -l --points-at HEAD", returnStdout: true).trim()
-                    echo "BUILD_TAG:================================ ${BUILD_TAG}"                    
+                    // echo "BUILD_TAG:================================ ${BUILD_TAG}"                    
 
                     def BUILD_TYPE = null
                     def BUILD_VERSION = null
@@ -48,8 +48,8 @@ pipeline{
                             BUILD_VERSION = BUILD_TAG
                             } 
                         else {
-                            currentBuild.result = 'FAILURE'
-                            return
+                            currentBuild.result = 'ABORTED'
+                            error("Aborting the as there are no build tags!")
                             // echo "has NO build tag "
                             // BUILD_TYPE = "snapshot"
                             // BUILD_VERSION = "master-SNAPSHOT"
@@ -76,8 +76,8 @@ pipeline{
                             BUILD_TAG = BUILD_VERSION
                             } 
                         else {
-                            currentBuild.result = 'FAILURE'
-                            return
+                            currentBuild.result = 'ABORTED'
+                            error("Aborting the as there are no build tags!")
                             // BUILD_TYPE = "snapshot"
                             // BUILD_VERSION = "develop-SNAPSHOT"
                             // BUILD_TAG = BUILD_VERSION
@@ -91,8 +91,8 @@ pipeline{
                             BUILD_TAG = BUILD_VERSION + "-" + BUILD_BRANCH_TASK
                             BUILD_BRANCH_TASK.replaceAll(" ", "-") + "-SNAPSHOT"
                     } else {
-                            currentBuild.result = 'FAILURE'
-                            return
+                            currentBuild.result = 'ABORTED'
+                            error("Aborting the as there are no build tags!")
                             // BUILD_TYPE = "snapshot"
                             // BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
                             // BUILD_TAG = BUILD_VERSION
