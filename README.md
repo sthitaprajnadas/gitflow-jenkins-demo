@@ -1,6 +1,6 @@
 # Multibranch CI with Gitflow
 
-![Feature Branch Image](images/feature-branch.png?raw=true "Feature Branch")
+
 
 ## Docker
 ```
@@ -21,8 +21,24 @@ git push
 
 git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8  )   
 
+```
+![Feature Branch Image](images/feature-branch.png?raw=true "Feature Branch")
+
+## Steps to trigger a Jenkins build from release branch  
+```
+git add .  
+git commit -m "commit for vX.XX.XXX"  [ git commit -m "commit for v1.2.8" ]   
+git push  
+git push --set-upstream origin release/vX.XX.XXX    [ git push --set-upstream origin release/v1.2.8 ]   
+git flow release finish  vX.XX.XXX -m "finishing vX.XX.XXX"  [ git flow release finish  v1.2.8 -m "finishing v1.2.8" ]  
+git push --tags  
+git push  
 
 ```
+
+![Hotfix Branch Image](images/hotfix-branch.png?raw=true "Hotfix Branch")  
+
+
 ## Gitflow References  
 
 https://endjin.com/blog/2013/04/a-step-by-step-guide-to-using-gitflow-with-teamcity-part-3-gitflow-commands  
@@ -56,11 +72,6 @@ git flow hotfix start <version>
 git flow hotfix finish <version>  
 git flow hotfix publish <version>  
 git flow hotfix track <version>  
-
-
-![Hotfix Branch Image](images/hotfix-branch.png?raw=true "Hotfix Branch")  
-
-
 
 
 ```
