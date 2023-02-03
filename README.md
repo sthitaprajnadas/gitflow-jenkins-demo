@@ -1,12 +1,12 @@
 # Multibranch CI with Gitflow
 
-
+r;pelease vs hotfix - Release and hotfix are the only two Gitflow branches that get merged directly into master. But the key difference is that release branches are created off the development branch, while hotfix branches are created directly off the master/main branch.  
 
 ## Docker
 ```
 docker build -t dockerspd/node-demo-app .  
 docker push dockerspd/node-demo-app  
-docker run -d -p 3100:3000 -v C:\STHITA\CLIENT_WORKS\RMA\POC\Gitflow-demo\node-gitflow\node-demo-app:/root dockerspd/node-demo-app  
+docker run -d -p 3100:3000 -v POC\Gitflow-demo\node-gitflow\node-demo-app:/root dockerspd/node-demo-app  
 
 ```
 ## Steps to trigger a Jenkins build from feature branch
@@ -25,7 +25,8 @@ git flow feature finish  vX.XX.XXX   []( ex: git flow feature finish  v1.0.8  )
 ![Feature Branch Image](images/feature-branch.png?raw=true "Feature Branch")
 
 ## Steps to trigger a Jenkins build from release branch  
-```
+```  
+git flow release start vX.XX.XXX    [ git flow feature start v1.0.8 ]  
 git add .  
 git commit -m "commit for vX.XX.XXX"  [ git commit -m "commit for v1.2.8" ]   
 git push  
@@ -33,6 +34,23 @@ git push --set-upstream origin release/vX.XX.XXX    [ git push --set-upstream or
 git flow release finish  vX.XX.XXX -m "finishing vX.XX.XXX"  [ git flow release finish  v1.2.8 -m "finishing v1.2.8" ]  
 git push --tags  
 git push  
+
+```
+
+## Steps to trigger a Jenkins build from hotfix branch  
+```
+git flow hotfix start vX.XX.XXX   [  git flow hotfix start '0.1.1'  ]   
+git add .  
+git commit -m "commit for vX.XX.XXX"  [ git commit -m "commit for v0.1.1" ]   
+git tag -a vX.XX.XXX -m "tagging for vX.XX.XXX"  []( ex: git tag -a v1.1.1  -m "tagging for v1.1.1"  )  
+
+git tag -l --points-at HEAD  []( to check the tag from remote )  
+git flow hotfix finish vX.XX.XXX   [  git flow hotfix finish '0.1.1'  ]
+
+git checkout master
+git tag -l
+got push
+
 
 ```
 
@@ -72,6 +90,5 @@ git flow hotfix start <version>
 git flow hotfix finish <version>  
 git flow hotfix publish <version>  
 git flow hotfix track <version>  
-
 
 ```

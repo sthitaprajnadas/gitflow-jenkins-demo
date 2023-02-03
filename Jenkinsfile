@@ -68,6 +68,19 @@ pipeline{
                             BUILD_TAG = BUILD_VERSION
                             }
                     } 
+                    else if (BUILD_BRANCH == "hotfix") {
+                        BUILD_BRANCH_TYPE = "hotfix"
+                        if (BUILD_TAG != "") {
+                            BUILD_TYPE = "snapshot"
+                            BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
+                            } 
+                        else {
+                            BUILD_TYPE = "snapshot"
+                            BUILD_VERSION = "hotfix-SNAPSHOT"
+                            BUILD_TAG = BUILD_VERSION
+                            }
+                    }                     
                     else if (BUILD_BRANCH == "develop") {
                         BUILD_BRANCH_TYPE = "develop"
                         if (BUILD_TAG != "") {
