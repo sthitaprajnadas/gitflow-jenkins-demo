@@ -1,6 +1,8 @@
 # Multibranch CI with Gitflow
 
-r;pelease vs hotfix - Release and hotfix are the only two Gitflow branches that get merged directly into master. But the key difference is that release branches are created off the development branch, while hotfix branches are created directly off the master/main branch.  
+Release vs hotfix - Release and hotfix are the only two Gitflow branches that get merged directly into master. But the key difference is that release branches are created off the development branch, while hotfix branches are created directly off the master/main branch.  
+
+![Gitflow workflow ](images/workflow.png?raw=true "Gitflow workflow")
 
 ## Docker
 ```
@@ -48,7 +50,7 @@ git flow hotfix finish vX.XX.XXX  -m "finshing hotfix for vX.XX.XXX" [  git flow
 
 git checkout master
 git tag -l
-got push --tags  
+git push --tags  
 git push  
 
 
