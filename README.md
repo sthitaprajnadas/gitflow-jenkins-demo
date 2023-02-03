@@ -42,14 +42,14 @@ git push
 git flow hotfix start vX.XX.XXX   [  git flow hotfix start '0.1.1'  ]   
 git add .  
 git commit -m "commit for vX.XX.XXX"  [ git commit -m "commit for v0.1.1" ]   
-git tag -a vX.XX.XXX -m "tagging for vX.XX.XXX"  []( ex: git tag -a v1.1.1  -m "tagging for v1.1.1"  )  
 
 git tag -l --points-at HEAD  []( to check the tag from remote )  
-git flow hotfix finish vX.XX.XXX   [  git flow hotfix finish '0.1.1'  ]
+git flow hotfix finish vX.XX.XXX  -m "finshing hotfix for vX.XX.XXX" [  git flow hotfix finish '0.1.1' -m "finshing hotfix for vX.XX.XXX"   ]
 
 git checkout master
 git tag -l
-got push
+got push --tags  
+git push  
 
 
 ```
