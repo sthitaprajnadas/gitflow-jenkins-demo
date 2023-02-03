@@ -50,9 +50,7 @@ pipeline{
                         else {
                             currentBuild.result = 'ABORTED'
                             error("Aborting the as there are no build tags!")
-                            // echo "has NO build tag "
-                            // BUILD_TYPE = "snapshot"
-                            // BUILD_VERSION = "master-SNAPSHOT"
+
                             }
                     } 
                     else if (BUILD_BRANCH == "release") {
@@ -67,20 +65,7 @@ pipeline{
                             BUILD_VERSION = "release-SNAPSHOT"
                             BUILD_TAG = BUILD_VERSION
                             }
-                    } 
-                    else if (BUILD_BRANCH == "hotfix") {
-                        BUILD_BRANCH_TYPE = "hotfix"
-                        if (BUILD_TAG != "") {
-                            BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = BUILD_BRANCH_TYPE + "-" + BUILD_TAG + "-SNAPSHOT"
-                            BUILD_TAG = BUILD_VERSION
-                            } 
-                        else {
-                            BUILD_TYPE = "snapshot"
-                            BUILD_VERSION = "hotfix-SNAPSHOT"
-                            BUILD_TAG = BUILD_VERSION
-                            }
-                    }                     
+                    }                
                     else if (BUILD_BRANCH == "develop") {
                         BUILD_BRANCH_TYPE = "develop"
                         if (BUILD_TAG != "") {
@@ -91,9 +76,7 @@ pipeline{
                         else {
                             currentBuild.result = 'ABORTED'
                             error("Aborting the as there are no build tags!")
-                            // BUILD_TYPE = "snapshot"
-                            // BUILD_VERSION = "develop-SNAPSHOT"
-                            // BUILD_TAG = BUILD_VERSION
+
                             }
                     } 
                     else if ((matcher)) {
@@ -106,9 +89,7 @@ pipeline{
                     } else {
                             currentBuild.result = 'ABORTED'
                             error("Aborting the as there are no build tags!")
-                            // BUILD_TYPE = "snapshot"
-                            // BUILD_VERSION = BUILD_BRANCH + "-SNAPSHOT"
-                            // BUILD_TAG = BUILD_VERSION
+
                     }
 
                     env.BUILD_BRANCH = BUILD_BRANCH
