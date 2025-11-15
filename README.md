@@ -17,24 +17,13 @@ Finalize the release in the release/* branch.
 Merge the release into both main and develop.  
 Tag the release on main for versioning.  
 
-## Gitflow vs Other branching Strategies  
-
-Gitflow:  
-Pros: 
-It is well-suited for **parallel development** as its structure promotes isolated and reviewable development workflows.     
-Teams can deliver **hotfixes to production** without disrupting unreleased changes.    
-Cons:  
-However, GitFlow can slow release velocity by requiring manual promotion of code.   
-**Merging hotfixes back into develop adds overhead** and potentially causes rework.   
-Multi-branch merging **increases pipeline complexity** and makes automation more difficult.   
-According to Atlassian, GitFlow is a **legacy (deprecated) strategy** that has given way to trunk-based workflows.   
-
 
 ## Docker
 ```
 docker build -t dockerspd/node-demo-app .  
 docker push dockerspd/node-demo-app  
-docker run -d -p 3100:3000 -v POC\Gitflow-demo\node-gitflow\node-demo-app:/root dockerspd/node-demo-app  
+docker run -d -p 3100:3000 -v POC\Gitflow-demo\node-gitflow\node-demo-app:/root dockerspd/node-demo-app.
+
 
 ```
 ## Steps to trigger a Jenkins build from feature branch
