@@ -4,6 +4,17 @@ Release vs hotfix - Release and hotfix are the only two Gitflow branches that ge
 
 ![Gitflow workflow ](images/workflow.png?raw=true "Gitflow workflow")
 
+## Flow
+
+Gitflow Workflow
+Create a feature/* branch from develop.
+Work on the feature.
+Merge feature branch into develop.
+When ready to release, create a release/* branch from develop.
+Finalize the release in the release/* branch.
+Merge the release into both main and develop.
+Tag the release on main for versioning.
+
 ## Docker
 ```
 docker build -t dockerspd/node-demo-app .  
