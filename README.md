@@ -8,8 +8,7 @@ But the key difference is that -
 ![Gitflow workflow ](images/workflow.png?raw=true "Gitflow workflow")
 
 ## Gitflow Workflow
-
-
+  
 Create a feature/* branch from develop.  
 Work on the feature.  
 Merge feature branch into develop.  
@@ -17,6 +16,19 @@ When ready to release, create a release/* branch from develop.
 Finalize the release in the release/* branch.  
 Merge the release into both main and develop.  
 Tag the release on main for versioning.  
+
+## Gitflow vs Other branching Strategies  
+
+Gitflow:  
+Pros: 
+It is well-suited for **parallel development** as its structure promotes isolated and reviewable development workflows.     
+Teams can deliver **hotfixes to production** without disrupting unreleased changes.    
+Cons:  
+However, GitFlow can slow release velocity by requiring manual promotion of code.   
+**Merging hotfixes back into develop adds overhead** and potentially causes rework.   
+Multi-branch merging **increases pipeline complexity** and makes automation more difficult.   
+According to Atlassian, GitFlow is a **legacy (deprecated) strategy** that has given way to trunk-based workflows.   
+
 
 ## Docker
 ```
